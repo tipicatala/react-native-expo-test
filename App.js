@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import ColoredBox from './components/ColoredBox'
 
 const App = () => {
   return (
@@ -7,15 +8,10 @@ const App = () => {
       <View style={styles.container}>
         <Text style={styles.header}>Here are some boxes of different colors</Text>
       </View>
-      <View style={[styles.container, styles.cyan]}>
-        <Text style={[styles.subTitle]}>Cyan: #2aa198</Text>
-      </View>
-      <View style={[styles.container, styles.blue]}>
-        <Text style={[styles.subTitle]}>Blue: #268bd2</Text>
-      </View>
-      <View style={[styles.container, styles.magenta]}>
-        <Text style={[styles.subTitle]}>Magenta: #d33682</Text>
-      </View>
+      <ColoredBox name='Cyan' color='#2aa198' />
+      <ColoredBox name='Blue' color='#268bd2' />
+      <ColoredBox name='Magenta' color='#d33682' />
+      <ColoredBox name='Orange' color='#cb4b16' />
     </SafeAreaView>
   );
 };
@@ -27,14 +23,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
     marginBottom: 10,
-  },
-  cyan: { backgroundColor: '#2aa198' },
-  blue: { backgroundColor: '#268bd2' },
-  magenta: { backgroundColor: '#d33682' },
-  subTitle: {
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 14,
   },
   header: {
     fontSize: 16,
