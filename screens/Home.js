@@ -9,6 +9,8 @@ import {
 
 import { shemes } from './colorsShemes';
 
+import PalettePreview from './PalettePreview';
+
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -26,20 +28,7 @@ const Home = ({ navigation }) => {
               }}
             >
               <Text style={styles.header}>{item.paletteName}</Text>
-              <FlatList
-                keyExtractor={(_, i) => i}
-                data={item.colors.slice(0, 5)}
-                horizontal
-                contentContainerStyle={styles.colorList}
-                renderItem={(color) => (
-                  <View
-                    style={[
-                      styles.color,
-                      { backgroundColor: color.item.hexCode },
-                    ]}
-                  />
-                )}
-              />
+              <PalettePreview colors={item.colors} />
             </TouchableOpacity>
           </View>
         )}
@@ -49,7 +38,6 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  colorList: { marginTop: 5, justifyContent: 'center', width: '100%' },
   container: {
     backgroundColor: 'pink',
     flexGrow: 1,
@@ -64,10 +52,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
-  },
-  color: {
-    width: 15,
-    height: 15,
   },
 });
 
