@@ -3,8 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const ColoredBox = ({ name, color }) => {
   const textColor = {
-    color: parseInt(color.replace('#', ''), 16) > 0xffffff / 1.1 ? 'black' : 'white'
-  }
+    color:
+      parseInt(color.replace('#', ''), 16) > 0xffffff / 1.1 ? 'black' : 'white',
+  };
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
       <Text style={[styles.subTitle, textColor]}>
