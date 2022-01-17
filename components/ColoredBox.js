@@ -1,11 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ColoredBox = ({name, color}) => {
+const ColoredBox = ({ name, color }) => {
+  const textColor = {
+    color: parseInt(color.replace('#', ''), 16) > 0xffffff / 1.1 ? 'black' : 'white'
+  }
   return (
-      <View style={[styles.container, { backgroundColor: color }]}>
-        <Text style={[styles.subTitle]}>{name}: {color}</Text>
-      </View>
+    <View style={[styles.container, { backgroundColor: color }]}>
+      <Text style={[styles.subTitle, textColor]}>
+        {name}: {color}
+      </Text>
+    </View>
   );
 };
 
@@ -22,6 +27,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 14,
   },
-})
+});
 
 export default ColoredBox;
