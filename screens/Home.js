@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,22 @@ import {
   FlatList,
 } from 'react-native';
 
-import { shemes } from './colorsShemes';
-
 import PalettePreview from './PalettePreview';
 
 const Home = ({ navigation }) => {
+  const [shemes, setShemes] = useState([])
+
+  const getShemes = async() => {
+    const result = await fetch('https://color-palette-api.kadikraman.vercel.app/palettes')
+    const palette = await result.json()
+
+    if (result.ok) setShemes(palette)
+  }
+
+  useEffect(() => {
+    getShemes()
+  }, [])
+    
   return (
     <View style={styles.container}>
       <FlatList
