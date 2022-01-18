@@ -22,11 +22,11 @@ const Home = ({ navigation }) => {
     if (result.ok) setShemes(palette);
   };
 
-  const handleRefresh = async() => {
-    setIsRefresh(true)
-    await getShemes()
-    setIsRefresh(false)
-  }
+  const handleRefresh = async () => {
+    setIsRefresh(true);
+    await getShemes();
+    setIsRefresh(false);
+  };
 
   useEffect(() => {
     getShemes();
@@ -35,6 +35,16 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
+        ListHeaderComponent={
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Modal');
+            }}
+            style={styles.modalTitleWrapper}
+          >
+            <Text style={styles.modalTitle}>Add your own color sheme 💞</Text>
+          </TouchableOpacity>
+        }
         refreshing={isRefresh}
         onRefresh={handleRefresh}
         keyExtractor={(item) => item.paletteName}
@@ -74,6 +84,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
+  },
+  modalTitle: {
+    color: 'pink',
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  modalTitleWrapper: {
+    marginTop: 20,
   },
 });
 
