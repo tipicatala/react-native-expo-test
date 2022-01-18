@@ -10,22 +10,33 @@ import {
 import PalettePreview from './PalettePreview';
 
 const Home = ({ navigation }) => {
-  const [shemes, setShemes] = useState([])
+  const [shemes, setShemes] = useState([]);
+  const [isRefresh, setIsRefresh] = useState(false);
 
-  const getShemes = async() => {
-    const result = await fetch('https://color-palette-api.kadikraman.vercel.app/palettes')
-    const palette = await result.json()
+  const getShemes = async () => {
+    const result = await fetch(
+      'https://color-palette-api.kadikraman.vercel.app/palettes',
+    );
+    const palette = await result.json();
 
-    if (result.ok) setShemes(palette)
+    if (result.ok) setShemes(palette);
+  };
+
+  const handleRefresh = async() => {
+    setIsRefresh(true)
+    await getShemes()
+    setIsRefresh(false)
   }
 
   useEffect(() => {
-    getShemes()
-  }, [])
-    
+    getShemes();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList
+        refreshing={isRefresh}
+        onRefresh={handleRefresh}
         keyExtractor={(item) => item.paletteName}
         data={shemes}
         renderItem={({ item }) => (
