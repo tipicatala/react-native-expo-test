@@ -48,7 +48,7 @@ const Home = ({ navigation, newPalettes }) => {
         refreshing={isRefresh}
         onRefresh={handleRefresh}
         keyExtractor={(item) => item.paletteName}
-        data={[...shemes, ...newPalettes ]}
+        data={[...newPalettes,...shemes ]}
         renderItem={({ item }) => (
           <View style={styles.sheme}>
             <TouchableOpacity

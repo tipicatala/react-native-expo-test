@@ -85,7 +85,7 @@ const ColorPaletteModal = ({ setNewPalettes, navigation }) => {
           Alert.alert('Colors', 'Please select at least 3 colors')
           return;
         }
-        setNewPalettes(arr => [...arr, newPalette])
+        setNewPalettes(arr => [newPalette, ...arr])
         navigation.goBack()
       }}>
         <Text style={styles.submitText}>Submit</Text>
