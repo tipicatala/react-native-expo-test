@@ -7,6 +7,7 @@ import {
   FlatList,
   Switch,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import { COLORS } from '../constants';
@@ -76,6 +77,14 @@ const ColorPaletteModal = ({ setNewPalettes, navigation }) => {
         )}
       />
       <TouchableOpacity onPress={() => {
+        if (newPalette.paletteName === '') {
+          Alert.alert('Palette name', 'Please enter your palette name')
+          return;
+        }
+        if (newPalette.colors.length < 3) {
+          Alert.alert('Colors', 'Please select at least 3 colors')
+          return;
+        }
         setNewPalettes(arr => [...arr, newPalette])
         navigation.goBack()
       }}>
