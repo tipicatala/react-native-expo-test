@@ -9,7 +9,7 @@ import {
 
 import PalettePreview from './PalettePreview';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, newPalettes }) => {
   const [shemes, setShemes] = useState([]);
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -48,7 +48,7 @@ const Home = ({ navigation }) => {
         refreshing={isRefresh}
         onRefresh={handleRefresh}
         keyExtractor={(item) => item.paletteName}
-        data={shemes}
+        data={[...shemes, ...newPalettes ]}
         renderItem={({ item }) => (
           <View style={styles.sheme}>
             <TouchableOpacity

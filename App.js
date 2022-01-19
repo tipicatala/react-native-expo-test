@@ -9,9 +9,12 @@ import ColorPaletteModal from './screens/ColorPaletteModal';
 const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
 
-const MainStackScreen = () => (
+const MainStackScreen = ({ newPalettes }) => (
   <MainStack.Navigator>
-    <MainStack.Screen name="Home" component={Home} />
+    <MainStack.Screen
+      name="Home"
+      children={(props) => <Home {...props} newPalettes={newPalettes} />}
+    />
     <MainStack.Screen
       name="ColorPalette"
       component={ColorPalette}
@@ -21,28 +24,26 @@ const MainStackScreen = () => (
 );
 
 const App = () => {
-  const [newPalette, setNewPalette] = useState({
-    name: '',
-    colors: [],
-  });
-  
+  const [newPalettes, setNewPalettes] = useState([]);
+
   return (
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Screen
           name="Main"
-          component={MainStackScreen}
           options={{ headerShown: false }}
+          children={() => <MainStackScreen newPalettes={newPalettes} />}
         />
         <RootStack.Screen
           name="Modal"
-          children={() => (
+          children={(props) => (
             <ColorPaletteModal
-              setNewPalette={setNewPalette}
-              newPalette={newPalette}
+              {...props}
+              setNewPalettes={setNewPalettes}
+              newPalettes={newPalettes}
             />
           )}
-          options={{ presentation: 'modal', setNewPalette, newPalette }}
+          options={{ presentation: 'modal' }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
